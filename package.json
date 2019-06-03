@@ -1,5 +1,5 @@
 {
-  "name": "threebox",
+  "name": "threebox-dw",
   "version": "0.2.0",
   "description": "A Mapbox GL JS plugin that combines the power of the Three.js 3D library with Mapbox geospatial tools.",
   "main": "main.js",
@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/peterqliu/threebox.git"
   },
-  "author": "@peterqliu and @kronick",
+  "author": "@peterqliu and @kronick and junyuz",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/peterqliu/threebox/issues"
