@@ -1,7 +1,7 @@
 {
-  "name": "threebox-dw",
-  "version": "0.2.0",
-  "description": "A Mapbox GL JS plugin that combines the power of the Three.js 3D library with Mapbox geospatial tools.",
+  "name": "threebox-map",
+  "version": "0.1.2",
+  "description": "A Mapbox GL Three.js plugin for npm",
   "main": "main.js",
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
   "dependencies": {
     "@turf/turf": "^5.1.6",
     "tape": "^4.10.1",
-    "turf": "^3.0.14",
     "watchify": "^3.11.1",
     "uglifyify": "5.0.1"
   }

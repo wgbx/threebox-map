@@ -1,26 +1,62 @@
-# `threebox`
+# threebox
 
 A three.js plugin for Mapbox GL JS, using the custom layer feature. Provides convenient methods to manage objects in lnglat coordinates, and to synchronize the map and scene cameras.
 
-<img alt="threebox" src="docs/gallery.jpg">
 
-### Compatibility/Dependencies
+## File
 
-- Mapbox v.0.50.0 and later (for custom layer support)
-- Three.r94 (already bundled into the Threebox build). If desired, other versions can be swapped in and rebuilt [here](https://github.com/peterqliu/threebox/blob/master/src/three.js), though compatibility is not guaranteed.
+[Click here to view the document](https://github.com/peterqliu/threebox)
 
-### Getting started
+## optimization
 
-Download the bundle from [`dist/threebox.js`](dist/threebox.js) and add include it in a `<script>` tag on your page.
+More strict handwriting mode is adopted to solve the problem of compiling luixus
 
-Several introductory examples are [here](https://github.com/peterqliu/threebox/tree/master/examples). To run them, create a `config.js` file with your Mapbox access token, alongside and in the format of [the template](https://github.com/peterqliu/threebox/blob/master/examples/config_template.js).
+## It might help you
 
-[Documentation lives here](docs/Threebox.md).
+ ```
+import mapboxgl from 'mapbox-gl'
+import * as THREE from 'three'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
+import {Threebox} from 'threebox-map';
 
-### Contributing
-
-Build the library with `npm run build`, or `npm run dev` to rebuild continuously as you develop. Both commands will output a bundle in `/dist/threebox.js`.
-
-Tests live [here](tests/) -- run `index.html` and check the console for test results.
+/*Load gltfdraco model*/
+let data = {
+    id: "",
+    url: '',
+    origin: []
+};
+let _this = this;
+let gltfLoader = new GLTFLoader();
+let dracoLoader = new DRACOLoader();
+let tb, cube;
+let layer = {
+    id: data.id,
+    type: 'custom',
+    onAdd: function (map, mbxContext) {
+    tb = new Threebox(
+        map,
+        mbxContext,
+        {defaultLights: true}
+    );
+    let pointLight = new THREE.PointLight('red', 1000, 5000);
+    tb.add(pointLight);
+    dracoLoader.setDecoderPath('static/draco/');
+    gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.load(data.url, (gltf => {
+            cube = tb.Object3D({obj: gltf.scene});
+            cube.set({rotation: {x: 90, y: -180, z: 0}});
+            cube.setCoords(data.origin);
+            tb.add(cube);
+            }));
+        },
+    render: function (gl, matrix) {
+            tb.update();
+            }
+    };
+_this.map.on('style.load', function () {
+    _this.map.addLayer(layer, 'country-label');
+});
+```
 
 
