@@ -1,6 +1,6 @@
 {
   "name": "threebox-map",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Mapbox GL Three.js plugin for npm",
   "main": "main.js",
   "repository": {
